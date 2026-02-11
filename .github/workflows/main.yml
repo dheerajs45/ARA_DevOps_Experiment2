@@ -1,0 +1,21 @@
+name: DevOps ARA Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: docker build -t devopsapp .
+
+    - name: Run Container
+      run: docker run -d -p 8082:80 devopsapp
+
